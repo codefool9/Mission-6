@@ -1,34 +1,32 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Mission__6.Models
+namespace Mission_6.Models
 {
     public class Movie
     {
-        // Primary Key - Required for the SQLite database to track records
         [Key]
         [Required]
         public int MovieId { get; set; }
 
-        [Required(ErrorMessage = "Category is required")]
+        [Required]
         public string Category { get; set; }
 
-        [Required(ErrorMessage = "Title is required")]
+        [Required]
         public string Title { get; set; }
 
-        [Required(ErrorMessage = "Year is required")]
-        [Range(1888, 2100, ErrorMessage = "Please enter a valid year")]
+        [Required]
         public int Year { get; set; }
 
-        [Required(ErrorMessage = "Director is required")]
+        [Required]
         public string Director { get; set; }
 
-        [Required(ErrorMessage = "Rating is required")]
+        [Required]
         public string Rating { get; set; }
-        public bool? Edited { get; set; } // Yes/No option
+
+        public bool Edited { get; set; }
 
         public string? LentTo { get; set; }
-
-        [MaxLength(25, ErrorMessage = "Notes must be 25 characters or less")] // Limit to 25 chars
+        [MaxLength(25)]
         public string? Notes { get; set; }
     }
 }
