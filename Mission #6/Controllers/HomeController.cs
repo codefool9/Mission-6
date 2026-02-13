@@ -19,7 +19,13 @@ namespace Mission__6.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            // Get the request identifier (may be null)
+            string requestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier;
+
+            // Try to parse to int; use 0 if parsing fails
+            int movieId = int.TryParse(requestId, out var parsed) ? parsed : 0;
+
+            return View(new Movie { MovieId = movieId });
         }
     }
 }
