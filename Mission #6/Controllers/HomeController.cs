@@ -22,10 +22,10 @@ namespace Mission_6.Controllers
         [HttpPost]
         public IActionResult MovieForm(Movie response)
         {
-            _context.Movies.Add(response); // Add record to database
-            _context.SaveChanges(); // Commit changes
+            _context.Movies.Add(response);
+            _context.SaveChanges(); 
 
-            return View("Confirmation", response);
+            return View("Index");
         }
     }
 }
