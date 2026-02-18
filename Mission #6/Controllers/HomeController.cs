@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Mission_6.Models;
 
 namespace Mission_6.Controllers
@@ -12,12 +13,27 @@ namespace Mission_6.Controllers
             _context = temp;
         }
 
-        public IActionResult Index() => View();
+        public IActionResult Index()
+        { 
+            // This gets the display for the movies for Joel to view
+            var movies = _context.Movies
+                .Include(m => m.CategoryId)
+                .OrderBy(m => m.Title)
+                .ToList();
 
-        public IActionResult GetToKnowJoel() => View();
+            return View(movies);
+        }
+
+        public IActionResult GetToKnowJoel()
+        { 
+            return View();
+        }
 
         [HttpGet]
-        public IActionResult MovieForm() => View();
+        public IActionResult MovieForm()
+        {
+            return View();        
+        }
 
         [HttpPost]
         public IActionResult MovieForm(Movie response)

@@ -9,12 +9,13 @@ namespace Mission_6.Models
         public int MovieId { get; set; }
 
         [Required]
-        public string Category { get; set; }
+        public int CategoryId { get; set; }
 
         [Required]
         public string Title { get; set; }
 
         [Required]
+        [Range(1888, 2100)] // No movies before 1888
         public int Year { get; set; }
 
         [Required]
@@ -23,9 +24,15 @@ namespace Mission_6.Models
         [Required]
         public string Rating { get; set; }
 
-        public bool Edited { get; set; }
+        [Required]
+        public bool Edited { get; set; } // EF Core maps 0/1 in SQLite to C# bool so this bool will be an int in the database
 
+        [MaxLength(25)]
         public string? LentTo { get; set; }
+
+        [Required]
+        public bool CopiedToPlex { get; set; } // I'm using a bool; EF Core handles the conversion
+
         [MaxLength(25)]
         public string? Notes { get; set; }
     }
