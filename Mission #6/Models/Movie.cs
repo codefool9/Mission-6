@@ -11,6 +11,8 @@ namespace Mission_6.Models
         [Required]
         public int CategoryId { get; set; }
 
+        public Category? Category { get; set; } // Navigation property for the related Category
+
         [Required]
         public string Title { get; set; }
 

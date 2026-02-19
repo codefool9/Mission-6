@@ -19,7 +19,7 @@ namespace Mission_6.Controllers
         { 
             // This gets the display for the movies for Joel to view
             var movies = _context.Movies
-                .Include(m => m.CategoryId)
+                .Include(m => m.Category)
                 .OrderBy(m => m.Title)
                 .ToList();
 
@@ -46,25 +46,26 @@ namespace Mission_6.Controllers
             return View("Index");
         }
 
-        [HttpGet]
-        public IActionResult Edit(int id)
+        [HttpPost]
+        public IActionResult Edit(Movie updatedInfo)
         {
-            var recordToEdit = _context.Movies
-                .Single(x => x.MovieId == id);
+            if (ModelState.IsValid)
+            {
+                _context.Update(updatedInfo);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
 
-            ViewBag.Categories = _context.Categories.ToList();
-
-            return View("AddMovie", recordToEdit);
-
+            ViewBag.Categories = _context.Categories.OrderBy(x => x.CategoryName).ToList();
+            return View("MovieForm", updatedInfo);
         }
 
-        [HttpGet]
-        public IActionResult Delete(int id)
+        [HttpPost]
+        public IActionResult Delete(Movie movie)
         {
-            var recordToDelete = _context.Movies
-                .Single(x => x.MovieId == id);
-
-            return View(recordToDelete);
+            _context.Movies.Remove(movie);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }
