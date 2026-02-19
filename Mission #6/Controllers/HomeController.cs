@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Mission_6.Models;
+using SQLitePCL;
+using System.Linq;
 
 namespace Mission_6.Controllers
 {
@@ -42,6 +44,27 @@ namespace Mission_6.Controllers
             _context.SaveChanges(); 
 
             return View("Index");
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var recordToEdit = _context.Movies
+                .Single(x => x.MovieId == id);
+
+            ViewBag.Categories = _context.Categories.ToList();
+
+            return View("AddMovie", recordToEdit);
+
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            var recordToDelete = _context.Movies
+                .Single(x => x.MovieId == id);
+
+            return View(recordToDelete);
         }
     }
 }
