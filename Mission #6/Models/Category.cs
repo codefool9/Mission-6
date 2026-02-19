@@ -6,7 +6,9 @@ namespace Mission_6.Models
     {
         [Key]
         [Required]
-        public int CategoryId { get; internal set; }
-        public string CategoryName { get; internal set; }
+        public int CategoryId { get; set; }
+
+        [Required]
+        public string CategoryName { get; set; }
     }
 }

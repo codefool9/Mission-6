@@ -9,9 +9,7 @@ namespace Mission_6.Models
         }
 
         public DbSet<Movie> Movies { get; set; }
-
         public DbSet<Category> Categories { get; set; }
-        public object CategoryId { get; internal set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
