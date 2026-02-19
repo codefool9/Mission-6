@@ -34,7 +34,7 @@ namespace Mission_6.Controllers
         [HttpGet]
         public IActionResult MovieForm()
         {
-            return View();        
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
@@ -44,6 +44,21 @@ namespace Mission_6.Controllers
             _context.SaveChanges(); 
 
             return View("Index");
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var movie = _context.Movies.Single(x => x.MovieId == id);
+            ViewBag.Categories = _context.Categories.OrderBy(x => x.CategoryName).ToList();
+            return View("MovieForm", movie);
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            var movie = _context.Movies.Single(x => x.MovieId == id);
+            return View(movie);
         }
 
         [HttpPost]
