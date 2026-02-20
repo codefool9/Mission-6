@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Mission_6.Models
 {
@@ -8,34 +9,31 @@ namespace Mission_6.Models
         [Required]
         public int MovieId { get; set; }
 
-        [Required]
-        public int CategoryId { get; set; }
-
-        public Category? Category { get; set; } // Navigation property for the related Category
-
-        [Required]
+        [Required(ErrorMessage = "Please enter a movie title")]
         public string Title { get; set; }
 
         [Required]
-        [Range(1888, 2100)] // No movies before 1888
+        [Range(1888, 2026, ErrorMessage = "Year must be 1888 or later")] // I made it so no movies can be added with a year before the first known film, and I set an upper limit to prevent unrealistic future years
         public int Year { get; set; }
 
-        [Required]
-        public string Director { get; set; }
+        public string? Director { get; set; }
+        public string? Rating { get; set; }
 
         [Required]
-        public string Rating { get; set; }
+        public bool Edited { get; set; }
 
-        [Required]
-        public bool Edited { get; set; } // EF Core maps 0/1 in SQLite to C# bool so this bool will be an int in the database
-
-        [MaxLength(25)]
         public string? LentTo { get; set; }
-
-        [Required]
-        public bool CopiedToPlex { get; set; } // I'm using a bool; EF Core handles the conversion
 
         [MaxLength(25)]
         public string? Notes { get; set; }
+
+        [Required]
+        public bool CopiedToPlex { get; set; }
+
+        [Required(ErrorMessage = "Please select a category")]
+        public int CategoryId { get; set; } // The Foreign Key
+
+        [ForeignKey("CategoryId")]
+        public Category? Category { get; set; } // The Navigation Property
     }
 }

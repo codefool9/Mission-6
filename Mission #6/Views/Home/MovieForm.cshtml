@@ -8,7 +8,7 @@
 
     <div class="form-group">
         <label asp-for="CategoryId">Category:</label>
-        <select asp-for="CategoryId" class="form-control" required>
+        <select asp-for="CategoryId" class="form-control">
             <option value="">Select a Category</option>
             @foreach (var c in ViewBag.Categories)
             {
