@@ -11,7 +11,11 @@
          alt="Joel Hilton" style="width:400px;" />
 </div>
 
-<table class="d-lg-table table-bordered table-striped table-responsive">
+<br />
+<br />
+
+<table class="table table-bordered table-striped table-responsive" style="padding:0;" >
+<style>table td, table th { padding: 8px; }</style>
     <thead>
         <tr>
             <th>Title</th>
@@ -39,7 +43,7 @@
                 <td>@movie.LentTo</td>
                 <td>@(movie.CopiedToPlex ? "Yes" : "No")</td>
                 <td>@movie.Notes</td>
-                <td>
+                <td style="white-space:nowrap;">
                     <a asp-action="Edit" asp-route-id="@movie.MovieId" class="btn btn-sm btn-info">Edit</a>
                     <a asp-action="Delete" asp-route-id="@movie.MovieId" class="btn btn-sm btn-danger">Delete</a>
                 </td>
